@@ -4,15 +4,23 @@
 <p>標籤: <%= @topic.category.name%></p>
 
 
-	<table class="table table-hover">
+	<table class="table table-bordered">
 			<tr>
-				<th>回應</th>
-				<th>回覆時間</th>
+				<th>留言</th>
+				<th>留言者</th>
+				<th>留言時間</th>
+				<th>功能</th>
 			</tr>
 			<tr>
 				<% @comment.each do |comment| %>
 				<td><%= comment.comment %> </td>
+				<td><%= comment.user.try(:short_name)%></td>
 				<td><%= comment.created_at %></td>
+
+				<% if current_user&&current_user.try(:id) == comment.user.try(:id)%>
+					<td><%= link_to 'Delete', topic_comment_path(@topic,comment), :method => :delete, :data => { :confirm => "Are you sure?"}, :class => "btn btn-danger" %></td>
+				<%end%>
+
 			</tr>
 				<%end%>
 	</table>
