@@ -3,13 +3,11 @@
   <head>
     <title>Disaster</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-
+  
     <% if current_user %>
    		<p>Hi <%=current_user.short_name %></p>
    		<%= link_to('登出', destroy_user_session_path, :method => :delete) %> |

@@ -18,18 +18,23 @@
 			<td><%= topic.user.try(:short_name)%></td>
 			<td><%= topic.created_at %></td>
 			<td>
+				<% if current_user&&current_user.try(:id) == topic.user.try(:id)%>
  		 		<%= link_to 'Edit', topics_path(:id => topic.id,:page => params[:page]) ,:class => "btn btn-primary" %>
 		 		<%= link_to 'Delete', topic_path(topic , :page => params[:page]), :method => :delete, :data => { :confirm => "Are you sure?"}, :class => "btn btn-danger" %>
+				<% end%>
  			</td>
 
 	</tr>
 		<% end %>
 </table>
  <%= paginate @topics %>
-<p>請將您的訊息貼在下方</p>
-<br>
-<p>訊息標籤</p>
-<%= form_for @topic do |t| %>
+
+<% if  current_user %>
+
+	<p>請將您的訊息貼在下方</p>
+	<br>
+	<p>訊息標籤</p>
+	<%= form_for @topic do |t| %>
 	<%= t.collection_select(:category_id, Category.all, :id, :name, :class => "form-control")  %>
 
 	<div class="form-group">
@@ -43,5 +48,5 @@
 	</div>
 
     <%= t.submit @sub, :class => "btn btn-primary"%>
+ 	<%end%>
  <%end%>
-
