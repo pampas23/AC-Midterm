@@ -1,4 +1,4 @@
 class Topic < ApplicationRecord
 	has_many :comments
-	belonds_to :catagory
+	belongs_to :category
 end
