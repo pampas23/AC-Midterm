@@ -1,11 +1,11 @@
 <h1>Hello 災情控制論壇</h1>
 
-
 <table class="table table-bordered">
 	<tr>
 		<th>標題</th>
 		<th>內容</th>
 		<th>標籤</th>
+		<th>發文者</th>
 		<th>發文時間</th>
 		<th>功能</th>	
 
@@ -15,6 +15,7 @@
 			<td><a href="<%=topic_path(topic) %>"><%= topic.title %></a></td>
 			<td><%= topic.content %></td>
 			<td><%= topic.category.try(:name)%></td>
+			<td><%= topic.user.try(:short_name)%></td>
 			<td><%= topic.created_at %></td>
 			<td>
  		 		<%= link_to 'Edit', topics_path(:id => topic.id,:page => params[:page]) ,:class => "btn btn-primary" %>

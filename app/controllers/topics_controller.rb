@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
 	
 	before_action :set_topic, :only =>[:show, :edit ,:update,:destroy]
+	before_action :authenticate_user! , :except => [:index]
 
 	def set_topic
 		@topic=Topic.find(params[:id])
@@ -26,7 +27,9 @@ class TopicsController < ApplicationController
 	end
 
 	def create
+
 		@topic = Topic.new(topic_params)
+		@topic.user = current_user
 		if @topic.save(topic_params)
 			redirect_to topics_path
 		else			
