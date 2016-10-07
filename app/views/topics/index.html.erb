@@ -1,7 +1,5 @@
 <h1>Hello 災情控制論壇</h1>
 
-<%= link_to "發表新文章" , new_topic_path, :class => "btn btn-primary" %>
-
 
 <table class="table table-hover">
 	<tr>
@@ -14,11 +12,10 @@
 	</tr>
 	<tr>
 		<% @topics.each do |topic| %>
-			<td><%= topic.title %></td>
+			<td><a href="<%=topic_path(topic) %>"><%= topic.title %></a></td>
 			<td><%= topic.content %></td>
 			<td><%= topic.created_at %></td>
 			<td>
-  				<%= link_to 'Show' , topic_path(topic) ,:class => "btn btn-info"%>
  		 		<%= link_to 'Edit', topics_path(:id => topic.id,:page => params[:page]) ,:class => "btn btn-primary" %>
 		 		<%= link_to 'Delete', topic_path(topic , :page => params[:page]), :method => :delete, :data => { :confirm => "Are you sure?"}, :class => "btn btn-danger" %>
  			</td>
