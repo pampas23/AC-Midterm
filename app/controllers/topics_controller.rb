@@ -39,6 +39,14 @@ class TopicsController < ApplicationController
 		@comment_new = @topic.comments.new 
 	end
 
+	def update
+	  	if @topic.update(topic_params)
+		redirect_to :action => :show, :id => @topic
+		else
+		render "edit"
+		end
+	end
+
 	private
 
 	def topic_params
