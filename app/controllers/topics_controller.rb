@@ -1,4 +1,11 @@
 class TopicsController < ApplicationController
+	
+	before_action :set_topic, :only =>[:show, :edit ,:update,:destroy]
+
+	def set_topic
+		@topic=Topic.find(params[:id])
+	end
+
 	def index
     	@topics = Topic.all
 
@@ -25,6 +32,11 @@ class TopicsController < ApplicationController
 		else			
 			render "new"
 		end		
+	end
+
+	def show
+		@comment=@topic.comments
+		@comment_new = @topic.comments.new 
 	end
 
 	private
