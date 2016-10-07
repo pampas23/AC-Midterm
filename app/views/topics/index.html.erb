@@ -1,11 +1,11 @@
 <h1>Hello 災情控制論壇</h1>
 
 
-<table class="table table-hover">
+<table class="table table-bordered">
 	<tr>
 		<th>標題</th>
 		<th>內容</th>
-
+		<th>標籤</th>
 		<th>發文時間</th>
 		<th>功能</th>	
 
@@ -14,6 +14,7 @@
 		<% @topics.each do |topic| %>
 			<td><a href="<%=topic_path(topic) %>"><%= topic.title %></a></td>
 			<td><%= topic.content %></td>
+			<td><%= topic.category.try(:name)%></td>
 			<td><%= topic.created_at %></td>
 			<td>
  		 		<%= link_to 'Edit', topics_path(:id => topic.id,:page => params[:page]) ,:class => "btn btn-primary" %>
@@ -23,8 +24,13 @@
 	</tr>
 		<% end %>
 </table>
-
+ <%= paginate @topics %>
+<p>請將您的訊息貼在下方</p>
+<br>
+<p>訊息標籤</p>
 <%= form_for @topic do |t| %>
+	<%= t.collection_select(:category_id, Category.all, :id, :name, :class => "form-control")  %>
+
 	<div class="form-group">
 		<%= t.label :title,"標題" %>
 		<%= t.text_field :title ,:class => "form-control"%>		
@@ -37,4 +43,4 @@
 
     <%= t.submit @sub, :class => "btn btn-primary"%>
  <%end%>
- <%= paginate @topics %>
+
