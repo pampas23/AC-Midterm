@@ -40,17 +40,25 @@ class TopicsController < ApplicationController
 	end
 
 	def update
+		@topics = Topic.all.page(params[:page]).per(5)
+		# @topics = @topics.page(params[:page]).per(5)
+	  	
 	  	if @topic.update(topic_params)
-		redirect_to :action => :show, :id => @topic
+			redirect_to :action => :show, :id => @topic
 		else
-		render "edit"
+			render "index"
 		end
+	end
+
+	def destroy
+		@topic.destroy
+		redirect_to topics_path
 	end
 
 	private
 
 	def topic_params
-	  params.require(:topic).permit(:title,:content)
+	  params.require(:topic).permit(:title,:content,:category_id)
 	end
 
 end
