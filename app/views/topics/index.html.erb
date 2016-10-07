@@ -8,14 +8,15 @@
 		<th>標題</th>
 		<th>內容</th>
 
-		<th>功能</th>
-		<th>最新回覆時間</th>	
+		<th>發文時間</th>
+		<th>功能</th>	
 
 	</tr>
 	<tr>
 		<% @topics.each do |topic| %>
 			<td><%= topic.title %></td>
 			<td><%= topic.content %></td>
+			<td><%= topic.created_at %></td>
 			<td>
   				<%= link_to 'Show' , topic_path(topic) ,:class => "btn btn-info"%>
  		 		<%= link_to 'Edit', topics_path(:id => topic.id,:page => params[:page]) ,:class => "btn btn-primary" %>

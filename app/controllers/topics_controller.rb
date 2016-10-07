@@ -4,10 +4,10 @@ class TopicsController < ApplicationController
 
   		if params[:id]
 			@topic = Topic.find(params[:id])
-			@sub = "Update"
+			@sub = "更新"
 		else
 			@topic = Topic.new
-			@sub = "new"
+			@sub = "新增"
 		end
 
   		sort_by = (params[:order] == 'comments_count') ? 'comments_count desc' : 'created_at'

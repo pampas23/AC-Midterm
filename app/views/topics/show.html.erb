@@ -1,0 +1,33 @@
+<h1>Hello Show Topics</h1>
+
+<p>標題: <%= @topic.title  %>
+
+<br> 內文: <%= @topic.content %>
+</br>
+
+
+	<table class="table table-hover">
+			<tr>
+				<th>回應</th>
+				<th>回覆時間</th>
+			</tr>
+			<tr>
+				<% @comment.each do |comment| %>
+				<td><%= comment.comment %> </td>
+				<td><%= comment.created_at %></td>
+			</tr>
+			<%end%>
+	</table>
+
+
+<%= form_for @comment_new , :url => topic_comments_path(@topic,@comment) ,:method => :post do |c| %>
+	<div class="form-group">
+		<%= c.label :comment,"Comment" %>
+		<%= c.text_field :comment ,:class => "form-control"%>		
+	</div>
+
+    <%= c.submit "留言", :class => "btn btn-primary"%>
+ <%end%>
+
+
+<%= link_to "back" , topics_path %>
