@@ -21,10 +21,8 @@ class TopicsController < ApplicationController
 	def create
 		@topic = Topic.new(topic_params)
 		if @topic.save(topic_params)
-			flash[:notice]="topic saved successfully"
 			redirect_to topics_path
-		else
-			flash[:alert]="topic not saved "
+		else			
 			render "new"
 		end		
 	end
